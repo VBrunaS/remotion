@@ -24,6 +24,11 @@ export const esquemaMuestra = z.object({
   logo: z
     .string()
     .describe("Ruta del logo dentro de public/, por ejemplo logos/estudio.svg"),
+  logoSobreTinta: z
+    .boolean()
+    .describe(
+      "El logo solo se lee sobre fondo oscuro; el cierre usa la tinta de fondo",
+    ),
   colorFondo: zColor().describe("Color de fondo (campo claro)"),
   colorTinta: zColor().describe("Color de tinta (campo oscuro)"),
   colorAcento: zColor().describe("Color de acento del estudio"),

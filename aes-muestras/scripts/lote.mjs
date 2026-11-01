@@ -104,6 +104,7 @@ for (const slug of slugs) {
       nombre: f.nombre,
       instagram: f.instagram ?? "",
       logo: f.logo,
+      logoSobreTinta: Boolean(f.logoSobreTinta),
       colorFondo: f.colores.fondo,
       colorTinta: f.colores.tinta,
       colorAcento: f.colores.acento,

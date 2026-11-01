@@ -30,7 +30,12 @@ export const Cierre: React.FC<{
     : `linear-gradient(100deg, #000 ${borde}%, transparent ${borde + 14}%)`;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: p.colorFondo, fontFamily: fam }}>
+    <AbsoluteFill
+      style={{
+        backgroundColor: p.logoSobreTinta ? p.colorTinta : p.colorFondo,
+        fontFamily: fam,
+      }}
+    >
       <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
         <Img
           name="Logo"
@@ -66,7 +71,7 @@ export const Cierre: React.FC<{
           right: 0,
           top: 1180,
           textAlign: "center",
-          color: p.colorTinta,
+          color: p.logoSobreTinta ? p.colorFondo : p.colorTinta,
           fontSize: 36,
           fontWeight: mov.pesoTexto,
           letterSpacing: "0.08em",
@@ -104,7 +109,7 @@ export const Cierre: React.FC<{
           bottom: 110,
           textAlign: "center",
           fontFamily: famFirma,
-          color: p.colorTinta,
+          color: p.logoSobreTinta ? p.colorFondo : p.colorTinta,
           fontSize: 26,
           fontWeight: 400,
           letterSpacing: "0.02em",

@@ -225,7 +225,7 @@ for (const t of trabajos) {
 // 3. Hoja de contactos y manifiesto.
 const manifiesto = {
   fecha,
-  carpetaDrive: `Muestras ǣs/${fecha}`,
+  carpetaDrive: `Muestras ǣs/${fecha} (traspaso manual desde el archivo comprimido)`,
   videos: hechos.map((h) => ({
     slug: h.slug,
     nombre: h.props.nombre,
@@ -247,6 +247,20 @@ if (hechos.length) {
       stdio: "inherit",
     },
   );
+}
+if (hechos.length) {
+  // Un solo archivo comprimido con los MP4 y la hoja de contactos, para arrastrarlo a Drive.
+  const zip = join(salida, `muestras-${fecha}.zip`);
+  if (existsSync(zip)) unlinkSync(zip);
+  execFileSync("zip", [
+    "-q",
+    "-j",
+    zip,
+    ...hechos.map((h) => h.archivo),
+    join(salida, "hoja-contactos.png"),
+    join(salida, "manifiesto.json"),
+  ]);
+  console.log(`Archivo para Drive: ${zip}`);
 }
 console.log(
   `Terminado en ${manifiesto.duracionTotalSegundos} s. Carpeta: ${salida}`,

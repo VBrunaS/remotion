@@ -41,7 +41,7 @@ node scripts/lote.mjs --fecha 2026-11-03 --lista datos/lotes/2026-11-03.txt
 node scripts/lote.mjs --estudios wegener-abogados,enroque-abogados --sin-verificar --subcuadros 2
 ```
 
-La salida queda en `out/<fecha>/` con un MP4 por estudio, `hoja-contactos.png` y `manifiesto.json`. La subida a Google Drive (carpeta «Muestras ǣs», subcarpeta por día) la hace la sesión de Claude a partir del manifiesto.
+La salida queda en `out/<fecha>/` con un MP4 por estudio, `hoja-contactos.png`, `manifiesto.json` y `muestras-<fecha>.zip` con todo junto. Claude envía ese zip en la conversación y el usuario lo arrastra a la carpeta «Muestras ǣs» de su Drive, en una subcarpeta con la fecha.
 
 ## Rutina diaria («haz el lote de hoy»)
 
@@ -49,7 +49,7 @@ La salida queda en `out/<fecha>/` con un MP4 por estudio, `hoja-contactos.png` y
 2. Verificar en BCN las normas de `datos/guiones.json` y poner la fecha del día en `fechaVerificacion`.
 3. Escribir `datos/lotes/<fecha>.txt` con los slugs del día.
 4. `node scripts/lote.mjs`.
-5. Revisar `hoja-contactos.png` y subir la carpeta a Drive.
+5. Revisar `hoja-contactos.png`, recibir el zip y arrastrarlo a Drive (carpeta «Muestras ǣs», subcarpeta con la fecha).
 
 ## Notas del entorno
 

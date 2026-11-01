@@ -39,6 +39,21 @@ for fase in range(4):
         mejor, mejor_e = fase, e
 fuertes = beats[mejor::4]
 
+# acentos: picos de ataque (los golpes que el oído nota) con su fuerza normalizada entre 0 y 1
+picos = librosa.onset.onset_detect(onset_envelope=onset, sr=sr, units="frames", backtrack=False, delta=0.05)
+fuerza = onset / (onset.max() if onset.max() > 0 else 1)
+acentos = [[round(float(librosa.frames_to_time(f, sr=sr)), 3), round(float(fuerza[f]), 3)] for f in picos]
+# energía: RMS por medio segundo, normalizada entre 0 y 1
+rms_all = librosa.feature.rms(y=y)[0]
+tiempos_rms = librosa.frames_to_time(np.arange(len(rms_all)), sr=sr)
+paso = 0.5
+energia = []
+for ini in np.arange(0, dur, paso):
+    sel = rms_all[(tiempos_rms >= ini) & (tiempos_rms < ini + paso)]
+    energia.append(float(sel.mean()) if len(sel) else 0.0)
+emax = max(energia) or 1.0
+energia = [round(e / emax, 3) for e in energia]
+
 # entrada: primer instante en que la energía (RMS suavizada) supera el 60 % de su máximo
 rms = librosa.feature.rms(y=y)[0]
 rms_s = np.convolve(rms, np.ones(8) / 8, mode="same")
@@ -60,6 +75,9 @@ entrada_item = {
     "entrada": entrada,
     "pulsos": beats,
     "fuertes": [round(t, 3) for t in fuertes],
+    "acentos": acentos,
+    "energiaPaso": paso,
+    "energia": energia,
 }
 
 os.makedirs(os.path.dirname(a.biblioteca), exist_ok=True)

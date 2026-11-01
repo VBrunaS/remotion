@@ -1,12 +1,23 @@
 import { type CalculateMetadataFunction, Composition } from "remotion";
+import biblioteca from "../datos/musica/biblioteca.json";
 import { esquemaMuestra, type PropsMuestra } from "./esquema";
+import { CORTES_PELICULA, elegirEntrada, type Tema } from "./motor";
 import { Muestra } from "./Muestra";
 
 // Los subcuadros multiplican la tasa de cuadros; el lote los mezcla después en 30 cuadros por segundo.
-const porSubcuadros: CalculateMetadataFunction<PropsMuestra> = ({ props }) => ({
-  fps: 30 * props.subcuadros,
-  durationInFrames: 450 * props.subcuadros,
-});
+const porSubcuadros: CalculateMetadataFunction<PropsMuestra> = ({ props }) => {
+  const tema =
+    (biblioteca.temas as Tema[]).find((t) => t.id === props.musica) ?? null;
+  const entradaMusica =
+    props.entradaMusica >= 0 || !tema
+      ? props.entradaMusica
+      : elegirEntrada(tema, CORTES_PELICULA, 15);
+  return {
+    fps: 30 * props.subcuadros,
+    durationInFrames: 450 * props.subcuadros,
+    props: { ...props, entradaMusica },
+  };
+};
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -30,7 +41,8 @@ export const RemotionRoot: React.FC = () => {
         tipografia: "Playfair Display" as const,
         area: "laboral" as const,
         tono: "sobrio" as const,
-        musica: "quiet-reflections",
+        musica: "revelation-of-light",
+        entradaMusica: -1,
         registro: "editorial" as const,
         guion: {
           pregunta: "¿Te despidieron\ncon las cotizaciones\nimpagas?",

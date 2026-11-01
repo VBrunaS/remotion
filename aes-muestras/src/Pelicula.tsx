@@ -9,6 +9,7 @@ import {
 } from "remotion";
 import type { Movimiento, PropsMuestra } from "./esquema";
 import {
+  alAcento,
   alPulso,
   envolver,
   geometria,
@@ -16,6 +17,7 @@ import {
   resorte,
   valor,
   type Geo,
+  type Tema,
 } from "./motor";
 
 // Película tipográfica de 15 s, un corte por pulso. Siete tramos con recursos distintos:
@@ -39,13 +41,15 @@ const caja = (g: Geo, extra: CSSProperties): CSSProperties => ({
 const secuencia = (
   nominales: number[],
   q: (s: number) => number,
+  qCorte: (s: number) => number,
+  cortes: number[],
   separacion: number,
   tope: number,
 ) => {
   const out: number[] = [];
   let previo = -1;
-  for (const s of nominales) {
-    let c = q(s);
+  for (const [i, s] of nominales.entries()) {
+    let c = cortes.includes(i) ? qCorte(s) : q(s);
     if (c > s + 0.3) c = s;
     if (c < previo + separacion) c = previo + separacion;
     c = Math.min(c, tope);
@@ -94,7 +98,7 @@ export const Pelicula: React.FC<{
   readonly fam: string;
   readonly famFirma: string;
   readonly mov: Movimiento;
-  readonly tema: { entrada: number; pulsos: number[] } | null;
+  readonly tema: Tema | null;
 }> = ({ p, fam, famFirma, mov, tema }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -171,6 +175,8 @@ export const Pelicula: React.FC<{
       14.1, // 31 firma
     ],
     alPulso(tema, 0.26),
+    alAcento(tema, 0.22),
+    [0, 11, 14, 21, 24, 26, 28],
     0.18,
     14.2,
   );

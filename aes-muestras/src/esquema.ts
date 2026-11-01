@@ -36,6 +36,11 @@ export const esquemaMuestra = z.object({
   area: z.enum(["familia", "laboral", "civil", "empresas"]),
   tono: z.enum(["sobrio", "moderno", "cercano", "energico"]),
   musica: z.string().describe("Id del tema en datos/musica/biblioteca.json"),
+  entradaMusica: z
+    .number()
+    .describe(
+      "Segundo del tema donde parte el video. -1 lo elige solo según los cortes",
+    ),
   registro: z.enum(["editorial", "cinetico"]),
   subcuadros: z
     .number()

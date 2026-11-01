@@ -13,6 +13,7 @@ import {
 import biblioteca from "../datos/musica/biblioteca.json";
 import { Pelicula } from "./Pelicula";
 import { type PropsMuestra, tokensMovimiento } from "./esquema";
+import type { Tema } from "./motor";
 import { cargadores, cargarInter } from "./fuentes";
 
 const Musica: React.FC<{ readonly src: string; readonly entrada: number }> = ({
@@ -66,7 +67,14 @@ export const Muestra: React.FC<PropsMuestra> = (p) => {
   }
 
   const mov = tokensMovimiento(p.registro, p.tono);
-  const tema = biblioteca.temas.find((t) => t.id === p.musica) ?? null;
+  const base =
+    (biblioteca.temas as Tema[]).find((t) => t.id === p.musica) ?? null;
+  const tema = base
+    ? {
+        ...base,
+        entrada: p.entradaMusica >= 0 ? p.entradaMusica : base.entrada,
+      }
+    : null;
 
   return (
     <AbsoluteFill style={{ backgroundColor: p.colorFondo }}>

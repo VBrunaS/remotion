@@ -120,6 +120,7 @@ for (const slug of slugs) {
       area: f.area,
       tono: f.tono,
       musica: tema.id,
+      entradaMusica: -1,
       registro: f.registro,
       guion: {
         pregunta: guion.pregunta,

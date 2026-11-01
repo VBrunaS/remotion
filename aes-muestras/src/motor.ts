@@ -108,3 +108,90 @@ export const envolver = (
   if (actual) lineas.push(actual);
   return lineas;
 };
+
+export type Tema = {
+  id: string;
+  archivo: string;
+  entrada: number;
+  duracion: number;
+  pulsos: number[];
+  acentos?: number[][];
+  energia?: number[];
+  energiaPaso?: number;
+};
+
+// Fuerza del acento más cercano a un instante absoluto del tema, dentro de una ventana.
+const acentoEn = (tema: Tema, t: number, ventana: number) => {
+  let mejor = 0;
+  for (const [a, f] of tema.acentos ?? []) {
+    if (Math.abs(a - t) <= ventana && f > mejor) mejor = f;
+  }
+  return mejor;
+};
+
+const energiaEn = (tema: Tema, t: number) => {
+  const e = tema.energia ?? [];
+  if (!e.length) return 0.5;
+  const i = Math.max(
+    0,
+    Math.min(e.length - 1, Math.floor(t / (tema.energiaPaso ?? 0.5))),
+  );
+  return e[i];
+};
+
+// Elige el segundo del tema donde debe partir el video. Prueba cada pulso como inicio y se queda con
+// el que pone acentos en los cortes de escena y la energía creciendo hacia el logo.
+export const elegirEntrada = (
+  tema: Tema,
+  cortes: { en: number; peso: number }[],
+  duracionVideo: number,
+) => {
+  if (!tema.acentos?.length) return tema.entrada;
+  let mejor = tema.entrada;
+  let mejorPuntaje = -Infinity;
+  for (const c of tema.pulsos) {
+    if (c + duracionVideo + 0.5 > tema.duracion) break;
+    let puntaje = 0;
+    for (const k of cortes) puntaje += k.peso * acentoEn(tema, c + k.en, 0.09);
+    const inicio = energiaEn(tema, c + 1);
+    const final = energiaEn(tema, c + duracionVideo - 2.5);
+    puntaje += 0.8 * final + 0.4 * inicio - 0.6 * Math.max(0, inicio - final);
+    if (puntaje > mejorPuntaje) {
+      mejorPuntaje = puntaje;
+      mejor = c;
+    }
+  }
+  return mejor;
+};
+
+// Mueve un instante nominal al acento fuerte más cercano (relativo a la entrada).
+export const alAcento = (tema: Tema | null, tolerancia: number) => {
+  if (!tema?.acentos?.length) return alPulso(tema, tolerancia);
+  const fuertes = tema.acentos
+    .filter(([, f]) => f >= 0.3)
+    .map(([a]) => a - tema.entrada)
+    .filter((a) => a >= 0);
+  return (s: number) => {
+    let mejor = s;
+    let dist = tolerancia;
+    for (const a of fuertes) {
+      const d = Math.abs(a - s);
+      if (d < dist) {
+        dist = d;
+        mejor = a;
+      }
+    }
+    return mejor;
+  };
+};
+
+// Cortes de escena de la película, en segundos nominales, con su peso para elegir la entrada.
+export const CORTES_PELICULA = [
+  { en: 0.5, peso: 1 },
+  { en: 3.15, peso: 1 },
+  { en: 4.45, peso: 1 },
+  { en: 7.3, peso: 1 },
+  { en: 8.9, peso: 1 },
+  { en: 11.8, peso: 1.2 },
+  { en: 12.5, peso: 1.5 },
+];

@@ -1,0 +1,28 @@
+{
+ "slug": "hilex-abogados",
+ "nombre": "HiLex Abogados",
+ "instagram": "@hilex.cl",
+ "instagramUrl": "https://www.instagram.com/hilex.cl/",
+ "web": "https://hilex.cl",
+ "correo": "contacto@hilex.cl",
+ "ciudad": null,
+ "nLista": 29,
+ "area": null,
+ "areaFundamento": "",
+ "logo": null,
+ "logoOrigen": null,
+ "logoCoincideInstagram": null,
+ "colores": {
+  "fondo": null,
+  "tinta": null,
+  "acento": null
+ },
+ "tipografia": null,
+ "tono": null,
+ "tonoFundamento": "",
+ "fuenteTono": null,
+ "registro": null,
+ "musica": null,
+ "estado": "pendiente",
+ "notas": "Web deducida del dominio del correo. Instagram, web y logo no revisados: el entorno no tiene acceso a red fuera de la API de ElevenLabs, GitHub y Google Fonts."
+}

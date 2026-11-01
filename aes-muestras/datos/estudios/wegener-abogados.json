@@ -1,0 +1,28 @@
+{
+ "slug": "wegener-abogados",
+ "nombre": "Wegener Abogados",
+ "instagram": "@wegenerabogados",
+ "instagramUrl": "https://www.instagram.com/wegenerabogados/",
+ "web": "https://wegener.cl",
+ "correo": "contacto@wegener.cl",
+ "ciudad": null,
+ "nLista": 19,
+ "area": null,
+ "areaFundamento": "",
+ "logo": null,
+ "logoOrigen": null,
+ "logoCoincideInstagram": null,
+ "colores": {
+  "fondo": null,
+  "tinta": null,
+  "acento": null
+ },
+ "tipografia": null,
+ "tono": null,
+ "tonoFundamento": "",
+ "fuenteTono": null,
+ "registro": null,
+ "musica": null,
+ "estado": "pendiente",
+ "notas": "Web deducida del dominio del correo. Instagram, web y logo no revisados: el entorno no tiene acceso a red fuera de la API de ElevenLabs, GitHub y Google Fonts."
+}

@@ -1,0 +1,28 @@
+{
+ "slug": "enroque-abogados",
+ "nombre": "Enroque Abogados",
+ "instagram": "@enroqueabogados.cl",
+ "instagramUrl": "https://www.instagram.com/enroqueabogados.cl/",
+ "web": "https://enroqueabogados.cl",
+ "correo": "contacto@enroqueabogados.cl",
+ "ciudad": null,
+ "nLista": 3,
+ "area": null,
+ "areaFundamento": "",
+ "logo": null,
+ "logoOrigen": null,
+ "logoCoincideInstagram": null,
+ "colores": {
+  "fondo": null,
+  "tinta": null,
+  "acento": null
+ },
+ "tipografia": null,
+ "tono": null,
+ "tonoFundamento": "",
+ "fuenteTono": null,
+ "registro": null,
+ "musica": null,
+ "estado": "pendiente",
+ "notas": "Web deducida del dominio del correo. Instagram, web y logo no revisados: el entorno no tiene acceso a red fuera de la API de ElevenLabs, GitHub y Google Fonts."
+}

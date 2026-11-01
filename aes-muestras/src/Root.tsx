@@ -36,13 +36,16 @@ export const RemotionRoot: React.FC = () => {
           pregunta: "¿Te despidieron\ncon las cotizaciones\nimpagas?",
           normaTitulo: "Código del Trabajo, artículo 162, inciso 5°",
           normaNumero: "162",
+          normaCita:
+            "éste no producirá el efecto de poner término al contrato de trabajo",
           normaTexto:
             "Si el empleador no hubiere efectuado el integro de dichas cotizaciones previsionales al momento del despido, éste no producirá el efecto de poner término al contrato de trabajo.",
           fuente:
             "Código del Trabajo, art. 162 incs. 5° y 7° (DFL 1 de 2002, Ministerio del Trabajo). Biblioteca del Congreso Nacional, bcn.cl/leychile",
           fechaVerificacion: "domingo 1 de noviembre de 2026",
           consecuencia:
-            "El empleador sigue debiendo *las remuneraciones y cotizaciones* hasta que pague y lo comunique por escrito.",
+            "Sigue debiendo *remuneraciones y cotizaciones* hasta que pague.",
+          oferta: "Revisamos tu finiquito antes de firmar.",
           antes: "Despido",
           despues: "Despido nulo",
           linea: {

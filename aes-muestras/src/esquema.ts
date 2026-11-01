@@ -49,7 +49,10 @@ export const esquemaMuestra = z.object({
     pregunta: zTextarea().describe("Gancho. Saltos de línea manuales"),
     normaTitulo: z.string(),
     normaNumero: z.string().describe("Número grande de fondo"),
-    normaTexto: zTextarea().describe("Cita literal de la norma"),
+    normaTexto: zTextarea().describe("Cita literal completa de la norma"),
+    normaCita: z
+      .string()
+      .describe("Fragmento literal que se muestra, diez palabras o menos"),
     fuente: z.string().describe("Pie con la fuente"),
     fechaVerificacion: z
       .string()
@@ -57,6 +60,7 @@ export const esquemaMuestra = z.object({
     consecuencia: zTextarea().describe(
       "Una idea. La frase clave entre *asteriscos*",
     ),
+    oferta: z.string().describe("Propuesta de valor del estudio, en el cierre"),
     antes: z.string().describe("Palabra que se tacha"),
     despues: z.string().describe("Palabra en la que se transforma"),
     linea: z.object({

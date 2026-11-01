@@ -1,5 +1,5 @@
 {
- "nota": "Guiones para revisión jurídica. fechaVerificacion vacía bloquea el lote. El bloque bcn guarda idNorma, idParte y fecha de versión del artículo según el XML oficial de Ley Chile.",
+ "nota": "Guiones para revisión jurídica. fechaVerificacion vacía bloquea el lote. El bloque bcn guarda idNorma, idParte y fecha de versión del artículo según el XML oficial de Ley Chile. normaCita es el fragmento literal que se muestra en pantalla (la cita completa queda en normaTexto). oferta es la frase de valor del cierre.",
  "guiones": {
   "familia": {
    "etiqueta": "Derecho de familia",
@@ -9,7 +9,7 @@
    "normaTexto": "Si los padres viven separados podrán determinar de común acuerdo que el cuidado personal de los hijos corresponda al padre, a la madre o a ambos en forma compartida.",
    "fuente": "Código Civil, art. 225 inc. 1°, texto fijado por la Ley 20.680. Biblioteca del Congreso Nacional, bcn.cl/leychile",
    "fechaVerificacion": "domingo 1 de noviembre de 2026",
-   "consecuencia": "Ese acuerdo solo vale por *escritura pública o acta ante el Registro Civil*, subinscrita dentro de treinta días.",
+   "consecuencia": "Solo vale por *escritura pública o acta* ante el Registro Civil.",
    "bcn": {
     "idNorma": 172986,
     "idParte": 8718040,
@@ -24,7 +24,9 @@
     "de": "Acuerdo",
     "a": "Subinscripción",
     "frase": "Treinta días para inscribirlo."
-   }
+   },
+   "normaCita": "el cuidado personal de los hijos corresponda al padre, a la madre o a ambos",
+   "oferta": "Redactamos e inscribimos tu acuerdo."
   },
   "laboral": {
    "etiqueta": "Derecho laboral",
@@ -34,7 +36,7 @@
    "normaTexto": "Si el empleador no hubiere efectuado el integro de dichas cotizaciones previsionales al momento del despido, éste no producirá el efecto de poner término al contrato de trabajo.",
    "fuente": "Código del Trabajo, art. 162 incs. 5° y 7° (DFL 1 de 2002, Ministerio del Trabajo). Biblioteca del Congreso Nacional, bcn.cl/leychile",
    "fechaVerificacion": "domingo 1 de noviembre de 2026",
-   "consecuencia": "El empleador sigue debiendo *las remuneraciones y cotizaciones* hasta que pague y lo comunique por escrito.",
+   "consecuencia": "Sigue debiendo *remuneraciones y cotizaciones* hasta que pague.",
    "bcn": {
     "idNorma": 207436,
     "idParte": 8512020,
@@ -49,7 +51,9 @@
     "de": "Despido",
     "a": "Cotizaciones al día",
     "frase": "Sin pago, no hay despido."
-   }
+   },
+   "normaCita": "éste no producirá el efecto de poner término al contrato de trabajo",
+   "oferta": "Revisamos tu finiquito antes de firmar."
   },
   "civil": {
    "etiqueta": "Derecho civil e inmobiliario",
@@ -59,7 +63,7 @@
    "normaTexto": "La promesa de celebrar un contrato no produce obligación alguna; salvo que concurran las circunstancias siguientes [...] 3ª. Que la promesa contenga un plazo o condición que fije la época de la celebración del contrato.",
    "fuente": "Código Civil, art. 1554 N° 3. Biblioteca del Congreso Nacional, bcn.cl/leychile",
    "fechaVerificacion": "domingo 1 de noviembre de 2026",
-   "consecuencia": "Sin un plazo o una condición que fije la fecha, *la promesa no produce obligación alguna* y el negocio queda en el aire.",
+   "consecuencia": "Sin plazo ni condición, *la promesa no obliga*.",
    "bcn": {
     "idNorma": 172986,
     "idParte": 8719495,
@@ -74,7 +78,9 @@
     "de": "Firma",
     "a": "Fecha fijada",
     "frase": "Sin plazo, no obliga."
-   }
+   },
+   "normaCita": "La promesa de celebrar un contrato no produce obligación alguna",
+   "oferta": "Revisamos tu promesa antes de firmar."
   },
   "empresas": {
    "etiqueta": "Derecho de empresas",
@@ -84,7 +90,7 @@
    "normaTexto": "La obligación de pago del saldo insoluto contenido en la factura deberá ser cumplida de manera efectiva en el plazo máximo de treinta días corridos contado desde la recepción de la factura.",
    "fuente": "Ley 19.983, arts. 2, 2 bis y 2 ter, según la Ley 21.131 (pago a treinta días). Biblioteca del Congreso Nacional, bcn.cl/leychile",
    "fechaVerificacion": "domingo 1 de noviembre de 2026",
-   "consecuencia": "Vencido el plazo, el deudor debe *interés corriente y una comisión fija del 1 %* del saldo insoluto.",
+   "consecuencia": "Vencido el plazo, *interés corriente y comisión del 1 %*.",
    "bcn": {
     "idNorma": 233421,
     "idParte": 8660370,
@@ -100,7 +106,9 @@
     "de": "Recepción",
     "a": "Día 30",
     "frase": "Desde el día 31, interés y 1 %."
-   }
+   },
+   "normaCita": "en el plazo máximo de treinta días corridos",
+   "oferta": "Cobramos tus facturas vencidas."
   }
  }
 }

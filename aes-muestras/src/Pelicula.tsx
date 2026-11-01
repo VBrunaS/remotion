@@ -140,34 +140,35 @@ export const Pelicula: React.FC<{
       0.5,
       0.75, // 0 apretar, 1 astilla → regla del encabezado
       0.95,
-      1.17,
-      1.39,
-      1.61,
-      1.83,
-      2.05,
-      2.27,
-      2.49, // 2-9 palabras de la pregunta
-      2.75, // 10 trazo bajo la última palabra
-      3.05, // 11 corte a invertido, la palabra
-      3.5, // 12 tachado
+      1.15,
+      1.35,
+      1.55,
+      1.75,
+      1.95,
+      2.15,
+      2.35, // 2-9 palabras de la pregunta
+      2.55, // 10 trazo bajo la última palabra
+      3.15, // 11 corte a invertido, la palabra
+      3.55, // 12 tachado
       3.85, // 13 transformación
       4.45, // 14 corte a la norma, el número rueda
-      4.95, // 15 título
-      5.3,
-      5.65,
+      4.85, // 15 título
+      5.1,
+      5.4,
+      5.7,
       6.0,
-      6.35,
-      6.7, // 16-20 líneas de la cita
-      7.15, // 21 corte a la línea de tiempo
-      7.4, // 22 el punto viaja
+      6.3, // 16-20 líneas de la cita
+      7.3, // 21 corte a la línea de tiempo
+      7.5, // 22 el punto viaja
       8.3, // 23 frase de la línea
-      9.0, // 24 corte invertido, consecuencia palabra a palabra
-      10.9, // 25 trazo bajo la frase clave
-      11.6, // 26 inundación en acento
-      11.95, // 27 contracción a la caja del logo
-      12.45, // 28 la caja se pliega y descubre el logo
-      13.05, // 29 instagram
-      13.6, // 30 firma
+      8.9, // 24 corte invertido, consecuencia palabra a palabra
+      11.0, // 25 trazo bajo la frase clave
+      11.8, // 26 inundación en acento
+      12.1, // 27 contracción a la caja del logo
+      12.5, // 28 la caja se pliega y descubre el logo
+      13.0, // 29 oferta de valor
+      13.6, // 30 instagram y llamado
+      14.1, // 31 firma
     ],
     alPulso(tema, 0.26),
     0.18,
@@ -310,7 +311,7 @@ export const Pelicula: React.FC<{
   const tamNumero = Math.min(480, ajustar(p.guion.normaNumero, 480));
   const tamCita = mov.mayusculas ? 50 : 54;
   const lineasCita = envolver(
-    `«${p.guion.normaTexto.replace(/\.$/, "")}».`,
+    `«${p.guion.normaCita.replace(/\.$/, "")}».`,
     {
       fontFamily: fam,
       fontSize: tamCita,
@@ -345,7 +346,7 @@ export const Pelicula: React.FC<{
   const topeConsec = 960 - (lineasConsec.length * altoLineaConsec) / 2;
   const palabrasConsec = consecPlana.split(/\s+/);
   const pasoConsec = Math.min(
-    0.22,
+    0.18,
     (ev[25] - ev[24] - 0.4) / Math.max(1, palabrasConsec.length),
   );
   const trazoClave = resorte(t - ev[25], 0.5 * k);
@@ -904,25 +905,78 @@ export const Pelicula: React.FC<{
             <div
               style={{
                 position: "absolute",
-                left: 190,
-                top: 1163,
-                width: 700,
-                height: 72,
+                left: IZQ,
+                top: 1190,
+                width: ANCHO,
+                height: 150,
                 overflow: "hidden",
               }}
             >
               <div
                 style={{
                   color: colorCierre,
-                  fontSize: 36,
-                  fontWeight: mov.pesoTexto,
-                  letterSpacing: "0.08em",
+                  fontSize: 52,
+                  fontWeight: peso,
+                  letterSpacing: mov.espaciado,
+                  textTransform: mayus,
+                  lineHeight: 1.12,
                   textAlign: "center",
-                  lineHeight: 2,
-                  translate: `0px ${-(1 - resorte(t - ev[29], 0.5 * k)) * 80}px`,
                 }}
               >
-                {p.instagram}
+                {p.guion.oferta.split(" ").map((w, i) => (
+                  <span
+                    key={`${w}-${i}`}
+                    style={{
+                      display: "inline-block",
+                      marginRight: "0.26em",
+                      opacity: t >= ev[29] + i * 0.12 ? 1 : 0,
+                      translate: `0px ${(1 - resorte(t - ev[29] - i * 0.12, 0.22 * k)) * 24}px`,
+                    }}
+                  >
+                    {texto(w)}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                left: IZQ,
+                top: 1360,
+                width: ANCHO,
+                height: 110,
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "center",
+                  translate: `0px ${(1 - resorte(t - ev[30], 0.5 * k)) * 110}px`,
+                }}
+              >
+                <div
+                  style={{
+                    color: p.colorAcento,
+                    fontSize: 38,
+                    fontWeight: mov.pesoTexto,
+                    letterSpacing: "0.08em",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {p.instagram}
+                </div>
+                <div
+                  style={{
+                    color: colorCierre,
+                    opacity: 0.7,
+                    fontSize: 28,
+                    fontWeight: mov.pesoTexto,
+                    letterSpacing: "0.06em",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Escríbenos por mensaje directo
+                </div>
               </div>
             </div>
             <div
@@ -944,7 +998,7 @@ export const Pelicula: React.FC<{
                   letterSpacing: "0.02em",
                   textAlign: "center",
                   lineHeight: 2.1,
-                  translate: `0px ${(1 - resorte(t - ev[30], 0.5 * k)) * 60}px`,
+                  translate: `0px ${(1 - resorte(t - ev[31], 0.5 * k)) * 60}px`,
                 }}
               >
                 Muestra preparada por ǣs

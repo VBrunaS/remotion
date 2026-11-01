@@ -126,6 +126,8 @@ for (const slug of slugs) {
         normaTitulo: guion.normaTitulo,
         normaNumero: guion.normaNumero,
         normaTexto: guion.normaTexto,
+        normaCita: guion.normaCita,
+        oferta: guion.oferta,
         fuente: guion.fuente,
         fechaVerificacion: guion.fechaVerificacion,
         consecuencia: guion.consecuencia,

@@ -173,7 +173,7 @@ const inicio = Date.now();
 for (const t of trabajos) {
   const t0 = Date.now();
   try {
-    const composicion = await selectComposition({
+    const seleccionada = await selectComposition({
       serveUrl: paquete,
       id: composicion,
       inputProps: t.props,
@@ -182,7 +182,7 @@ for (const t of trabajos) {
     const crudo =
       subcuadros > 1 ? t.archivo.replace(/\.mp4$/, ".crudo.mp4") : t.archivo;
     await renderMedia({
-      composition: composicion,
+      composition: seleccionada,
       serveUrl: paquete,
       codec: "h264",
       outputLocation: crudo,

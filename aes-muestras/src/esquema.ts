@@ -73,6 +73,15 @@ export const esquemaMuestra = z.object({
       a: z.string(),
       frase: z.string(),
     }),
+    chat: z.array(
+      z.object({
+        de: z.enum(["cliente", "estudio"]),
+        texto: z.string(),
+        documento: z.boolean().optional(),
+        boton: z.boolean().optional(),
+      }),
+    ),
+    cifras: z.array(z.object({ valor: z.string(), etiqueta: z.string() })),
   }),
 });
 

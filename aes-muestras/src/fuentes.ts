@@ -11,6 +11,8 @@ import { loadFont as oswald } from "@remotion/google-fonts/Oswald";
 import { loadFont as playfair } from "@remotion/google-fonts/PlayfairDisplay";
 import { loadFont as spaceGrotesk } from "@remotion/google-fonts/SpaceGrotesk";
 import { loadFont as syne } from "@remotion/google-fonts/Syne";
+import { useEffect, useState } from "react";
+import { cancelRender, continueRender, delayRender } from "remotion";
 import type { TIPOGRAFIAS } from "./esquema";
 
 type Cargada = { fontFamily: string; waitUntilDone: () => Promise<unknown> };
@@ -39,3 +41,32 @@ export const cargadores: Record<(typeof TIPOGRAFIAS)[number], Cargador> = {
 
 // Inter siempre se carga para la firma «ǣs», que necesita el glifo ǣ.
 export const cargarInter = () => inter("normal", subsets());
+
+// Espera un grupo de fuentes (hoja de estilos y pesos) antes de medir y dibujar texto.
+export const useFuentes = (
+  cargar: () => Cargada[],
+  pesos: number[] = [400, 700],
+) => {
+  const [familias, setFamilias] = useState<string[] | null>(null);
+  useEffect(() => {
+    const h = delayRender("Cargando tipografías");
+    const cargadas = cargar();
+    Promise.all(cargadas.map((c) => c.waitUntilDone()))
+      .then(() =>
+        Promise.all(
+          cargadas.flatMap((c) =>
+            pesos.map((peso) =>
+              document.fonts.load(`${peso} 100px "${c.fontFamily}"`),
+            ),
+          ),
+        ),
+      )
+      .then(() => {
+        setFamilias(cargadas.map((c) => c.fontFamily));
+        continueRender(h);
+      })
+      .catch((err) => cancelRender(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return familias;
+};

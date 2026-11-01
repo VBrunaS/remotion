@@ -39,6 +39,7 @@ const fecha =
 const concurrencia = Number(opcion("concurrencia", "2"));
 const sinVerificar = bandera("sin-verificar");
 const subcuadros = Number(opcion("subcuadros", "2"));
+const composicion = opcion("composicion", "Muestra");
 
 let slugs = [];
 if (opcion("estudios")) {
@@ -107,7 +108,12 @@ for (const slug of slugs) {
   }
   trabajos.push({
     slug,
-    archivo: join(salida, `${slug}.mp4`),
+    archivo: join(
+      salida,
+      composicion === "Muestra"
+        ? `${slug}.mp4`
+        : `${slug}-${composicion.toLowerCase()}.mp4`,
+    ),
     props: {
       nombre: f.nombre,
       instagram: f.instagram ?? "",
@@ -135,6 +141,8 @@ for (const slug of slugs) {
         antes: guion.antes,
         despues: guion.despues,
         linea: guion.linea,
+        chat: guion.chat,
+        cifras: guion.cifras,
       },
       subcuadros,
     },
@@ -167,7 +175,7 @@ for (const t of trabajos) {
   try {
     const composicion = await selectComposition({
       serveUrl: paquete,
-      id: "Muestra",
+      id: composicion,
       inputProps: t.props,
       ...navegador,
     });

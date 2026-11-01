@@ -195,3 +195,25 @@ export const CORTES_PELICULA = [
   { en: 11.8, peso: 1.2 },
   { en: 12.5, peso: 1.5 },
 ];
+
+// Instantes nominales movidos al pulso (o al acento, para los cortes), en orden y con separación mínima.
+export const secuencia = (
+  nominales: number[],
+  q: (s: number) => number,
+  qCorte: (s: number) => number,
+  cortes: number[],
+  separacion: number,
+  tope: number,
+) => {
+  const out: number[] = [];
+  let previo = -1;
+  for (const [i, s] of nominales.entries()) {
+    let c = cortes.includes(i) ? qCorte(s) : q(s);
+    if (c > s + 0.3) c = s;
+    if (c < previo + separacion) c = previo + separacion;
+    c = Math.min(c, tope);
+    out.push(c);
+    previo = c;
+  }
+  return out;
+};

@@ -26,7 +26,45 @@
     "frase": "Treinta días para inscribirlo."
    },
    "normaCita": "el cuidado personal de los hijos corresponda al padre, a la madre o a ambos",
-   "oferta": "Redactamos e inscribimos tu acuerdo."
+   "oferta": "Redactamos e inscribimos tu acuerdo.",
+   "chat": [
+    {
+     "de": "cliente",
+     "texto": "Con mi ex acordamos el cuidado compartido, pero solo de palabra."
+    },
+    {
+     "de": "estudio",
+     "texto": "De palabra no vale. Código Civil, art. 225.",
+     "documento": true
+    },
+    {
+     "de": "cliente",
+     "texto": "¿Qué necesito entonces?"
+    },
+    {
+     "de": "estudio",
+     "texto": "Escritura pública o acta ante el Registro Civil, subinscrita dentro de treinta días."
+    },
+    {
+     "de": "estudio",
+     "texto": "Redactamos e inscribimos tu acuerdo. ¿Agendamos?",
+     "boton": true
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "225",
+     "etiqueta": "artículo del Código Civil"
+    },
+    {
+     "valor": "2",
+     "etiqueta": "formas válidas, escritura pública o acta"
+    },
+    {
+     "valor": "30",
+     "etiqueta": "días para subinscribir el acuerdo"
+    }
+   ]
   },
   "laboral": {
    "etiqueta": "Derecho laboral",
@@ -53,7 +91,45 @@
     "frase": "Sin pago, no hay despido."
    },
    "normaCita": "éste no producirá el efecto de poner término al contrato de trabajo",
-   "oferta": "Revisamos tu finiquito antes de firmar."
+   "oferta": "Revisamos tu finiquito antes de firmar.",
+   "chat": [
+    {
+     "de": "cliente",
+     "texto": "Me despidieron y resulta que no me habían pagado las cotizaciones."
+    },
+    {
+     "de": "estudio",
+     "texto": "Entonces ese despido no produce efecto. Código del Trabajo, art. 162.",
+     "documento": true
+    },
+    {
+     "de": "cliente",
+     "texto": "¿Y me tienen que seguir pagando?"
+    },
+    {
+     "de": "estudio",
+     "texto": "Sí. Remuneraciones y cotizaciones hasta que paguen y te lo comuniquen por escrito."
+    },
+    {
+     "de": "estudio",
+     "texto": "Revisamos tu finiquito antes de firmar. ¿Agendamos?",
+     "boton": true
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "162",
+     "etiqueta": "artículo del Código del Trabajo"
+    },
+    {
+     "valor": "0",
+     "etiqueta": "efecto de un despido con cotizaciones impagas"
+    },
+    {
+     "valor": "3",
+     "etiqueta": "días hábiles para avisar el despido por escrito"
+    }
+   ]
   },
   "civil": {
    "etiqueta": "Derecho civil e inmobiliario",
@@ -80,7 +156,45 @@
     "frase": "Sin plazo, no obliga."
    },
    "normaCita": "La promesa de celebrar un contrato no produce obligación alguna",
-   "oferta": "Revisamos tu promesa antes de firmar."
+   "oferta": "Revisamos tu promesa antes de firmar.",
+   "chat": [
+    {
+     "de": "cliente",
+     "texto": "Firmé una promesa de compraventa, pero no pusimos fecha."
+    },
+    {
+     "de": "estudio",
+     "texto": "Sin plazo ni condición, la promesa no produce obligación. Código Civil, art. 1554.",
+     "documento": true
+    },
+    {
+     "de": "cliente",
+     "texto": "¿Entonces no vale nada?"
+    },
+    {
+     "de": "estudio",
+     "texto": "Exige cuatro requisitos y ese es el tercero. Hay que revisar el documento completo."
+    },
+    {
+     "de": "estudio",
+     "texto": "Revisamos tu promesa antes de firmar. ¿Agendamos?",
+     "boton": true
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "1554",
+     "etiqueta": "artículo del Código Civil"
+    },
+    {
+     "valor": "4",
+     "etiqueta": "requisitos para que una promesa obligue"
+    },
+    {
+     "valor": "0",
+     "etiqueta": "obligaciones si falta uno"
+    }
+   ]
   },
   "empresas": {
    "etiqueta": "Derecho de empresas",
@@ -108,7 +222,45 @@
     "frase": "Desde el día 31, interés y 1 %."
    },
    "normaCita": "en el plazo máximo de treinta días corridos",
-   "oferta": "Cobramos tus facturas vencidas."
+   "oferta": "Cobramos tus facturas vencidas.",
+   "chat": [
+    {
+     "de": "cliente",
+     "texto": "Un cliente lleva 45 días sin pagarme una factura."
+    },
+    {
+     "de": "estudio",
+     "texto": "El plazo legal es de 30 días desde la recepción. Ley 19.983, art. 2.",
+     "documento": true
+    },
+    {
+     "de": "cliente",
+     "texto": "¿Puedo cobrar algo más?"
+    },
+    {
+     "de": "estudio",
+     "texto": "Desde el día 31 corre interés corriente y una comisión fija del 1 %."
+    },
+    {
+     "de": "estudio",
+     "texto": "Cobramos tus facturas vencidas. ¿Agendamos?",
+     "boton": true
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "30",
+     "etiqueta": "días corridos para pagar una factura"
+    },
+    {
+     "valor": "31",
+     "etiqueta": "día en que empieza la mora"
+    },
+    {
+     "valor": "1 %",
+     "etiqueta": "comisión fija por recuperación del pago"
+    }
+   ]
   }
  }
 }

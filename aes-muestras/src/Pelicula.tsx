@@ -16,6 +16,7 @@ import {
   PANTALLA,
   resorte,
   valor,
+  secuencia,
   type Geo,
   type Tema,
 } from "./motor";
@@ -37,27 +38,6 @@ const caja = (g: Geo, extra: CSSProperties): CSSProperties => ({
   height: g.h,
   ...extra,
 });
-
-const secuencia = (
-  nominales: number[],
-  q: (s: number) => number,
-  qCorte: (s: number) => number,
-  cortes: number[],
-  separacion: number,
-  tope: number,
-) => {
-  const out: number[] = [];
-  let previo = -1;
-  for (const [i, s] of nominales.entries()) {
-    let c = cortes.includes(i) ? qCorte(s) : q(s);
-    if (c > s + 0.3) c = s;
-    if (c < previo + separacion) c = previo + separacion;
-    c = Math.min(c, tope);
-    out.push(c);
-    previo = c;
-  }
-  return out;
-};
 
 // Trazo de pincel que se dibuja de izquierda a derecha.
 const Trazo: React.FC<{

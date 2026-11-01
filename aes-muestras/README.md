@@ -4,7 +4,7 @@ Plantilla de Remotion para producir en lote videos de muestra (15 s, vertical 10
 
 ## Qué hay en cada carpeta
 
-- `src/` la plantilla. `Root.tsx` registra la composición `Muestra` con su esquema editable en Remotion Studio. `Muestra.tsx` arma las cuatro escenas, las cortinas con el nombre y la música. `escenas/` tiene una escena por archivo. `esquema.ts` define las propiedades y los tokens de movimiento por registro y tono. `fuentes.ts` carga la tipografía elegida desde Google Fonts.
+- `src/` la plantilla. `Root.tsx` registra la composición `Muestra` con su esquema editable en Remotion Studio. `Muestra.tsx` carga la tipografía y la música. `Pelicula.tsx` es la película completa en un solo componente, siete tramos donde cada valor es una función del tiempo. `motor.ts` tiene los resortes en forma cerrada, la geometría, el ajuste al pulso y la envoltura de texto. `esquema.ts` define las propiedades y los tokens de movimiento por registro y tono. `fuentes.ts` carga la tipografía elegida desde Google Fonts.
 - `datos/prospectos.json` la lista completa de prospectos (convertida desde la planilla).
 - `datos/estudios/<slug>.json` la ficha de cada estudio. Nombre exacto, Instagram, web, área, logo, colores, tipografía, tono con su fundamento, registro, tema musical y estado (`pendiente`, `listo`, `excluido`).
 - `datos/guiones.json` los cuatro guiones jurídicos (familia, laboral, civil e inmobiliario, empresas) con la norma literal, la fuente y la fecha de verificación en BCN. Si la fecha está vacía, el lote se niega a renderizar.
@@ -18,7 +18,8 @@ Plantilla de Remotion para producir en lote videos de muestra (15 s, vertical 10
 1. La ficha del estudio aporta nombre, logo, colores, tipografía, área, tono y registro.
 2. El guion se toma de `datos/guiones.json` según el área.
 3. El tema se elige por el tono de la ficha (o por el campo `musica` si está fijado). Los tres cortes nominales (3 s, 7 s y 11 s) se mueven al pulso más cercano del tema.
-4. Escenas. Gancho con pregunta (3 s), norma con fuente (4 s), consecuencia en una idea (4 s) y cierre con el revelado del logo (4 s). Entre escenas, el nombre del estudio pasa como cortina.
+4. Tramos de la película (15 s, un corte por pulso). El nombre enorme se aprieta hasta una astilla que se vuelve la regla del encabezado. La pregunta llega palabra a palabra y la última se subraya a pincel. En un cuadro invertido una palabra se tacha y se transforma en otra (`antes` y `despues` del guion). El número del artículo rueda como un odómetro y la cita se apila línea a línea atenuando la anterior. Una línea de tiempo recorre el plazo (`linea` del guion). La consecuencia llega palabra a palabra y la frase clave se subraya en el color del estudio. La regla inunda la pantalla, se contrae en la caja del logo y se pliega para descubrirlo. Cierra con el Instagram y la firma «Muestra preparada por ǣs».
+5. Desenfoque de movimiento. El lote renderiza con `--subcuadros 2` (60 cuadros por segundo) y los promedia de a dos con ffmpeg para volver a 30, lo que da un desenfoque real en los movimientos rápidos. En Studio se previsualiza con 1 subcuadro.
 
 ## Comandos
 
@@ -37,7 +38,7 @@ node scripts/lote.mjs
 
 # Un lote concreto
 node scripts/lote.mjs --fecha 2026-11-03 --lista datos/lotes/2026-11-03.txt
-node scripts/lote.mjs --estudios wegener-abogados,enroque-abogados --sin-verificar
+node scripts/lote.mjs --estudios wegener-abogados,enroque-abogados --sin-verificar --subcuadros 2
 ```
 
 La salida queda en `out/<fecha>/` con un MP4 por estudio, `hoja-contactos.png` y `manifiesto.json`. La subida a Google Drive (carpeta «Muestras ǣs», subcarpeta por día) la hace la sesión de Claude a partir del manifiesto.
@@ -53,4 +54,4 @@ La salida queda en `out/<fecha>/` con un MP4 por estudio, `hoja-contactos.png` y
 ## Notas del entorno
 
 - En la nube de Claude el navegador de Remotion no se puede descargar, por eso `remotion.config.ts` apunta al Chrome instalado en `/opt/pw-browsers/chromium`. En otro computador, borrar esas dos líneas o cambiar la ruta (variable `REMOTION_BROWSER` para el lote).
-- El desenfoque de movimiento por canvas (`desenfoque: true`) necesita HTML-in-canvas en Chrome; en este entorno falla, así que las cortinas usan un desenfoque CSS proporcional a la velocidad.
+- `datos/musica/catalogo-elevenlabs.json` guarda todos los temas pregenerados leídos de las páginas de ElevenLabs (título, etiquetas, URL) para elegir nuevos sin volver a navegar. `scripts/pulsos.py` los incorpora a la biblioteca.

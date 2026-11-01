@@ -6,13 +6,20 @@
 //   node scripts/lote.mjs --estudios wegener-abogados,enroque-abogados
 //   Opciones: --sin-verificar (permite guiones sin fecha de verificación en BCN, solo para pruebas)
 //             --concurrencia 2
+//             --subcuadros 2 (cuadros intermedios que se mezclan para el desenfoque de movimiento)
 //
 // Salida: out/<fecha>/<slug>.mp4, out/<fecha>/hoja-contactos.png y out/<fecha>/manifiesto.json
 
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  unlinkSync,
+  writeFileSync,
+} from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -31,6 +38,7 @@ const fecha =
   );
 const concurrencia = Number(opcion("concurrencia", "2"));
 const sinVerificar = bandera("sin-verificar");
+const subcuadros = Number(opcion("subcuadros", "2"));
 
 let slugs = [];
 if (opcion("estudios")) {
@@ -121,9 +129,11 @@ for (const slug of slugs) {
         fuente: guion.fuente,
         fechaVerificacion: guion.fechaVerificacion,
         consecuencia: guion.consecuencia,
+        antes: guion.antes,
+        despues: guion.despues,
+        linea: guion.linea,
       },
-      cortes: [90, 210, 330],
-      desenfoque: false,
+      subcuadros,
     },
   });
 }
@@ -158,16 +168,48 @@ for (const t of trabajos) {
       inputProps: t.props,
       ...navegador,
     });
+    const crudo =
+      subcuadros > 1 ? t.archivo.replace(/\.mp4$/, ".crudo.mp4") : t.archivo;
     await renderMedia({
       composition: composicion,
       serveUrl: paquete,
       codec: "h264",
-      outputLocation: t.archivo,
+      outputLocation: crudo,
       inputProps: t.props,
       concurrency: concurrencia,
       crf: 18,
       ...navegador,
     });
+    if (subcuadros > 1) {
+      // Desenfoque de movimiento real: se promedian los subcuadros y se vuelve a 30 cuadros por segundo.
+      execFileSync("ffmpeg", [
+        "-v",
+        "error",
+        "-y",
+        "-i",
+        crudo,
+        "-vf",
+        `tmix=frames=${subcuadros},select='not(mod(n\\,${subcuadros}))',setpts=N/(30*TB)`,
+        "-r",
+        "30",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "18",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart",
+        t.archivo,
+      ]);
+      unlinkSync(crudo);
+    }
     hechos.push({ ...t, segundos: Math.round((Date.now() - t0) / 1000) });
     console.log(
       `  listo ${t.slug} (${Math.round((Date.now() - t0) / 1000)} s)`,

@@ -37,6 +37,14 @@ export const esquemaMuestra = z.object({
   tono: z.enum(["sobrio", "moderno", "cercano", "energico"]),
   musica: z.string().describe("Id del tema en datos/musica/biblioteca.json"),
   registro: z.enum(["editorial", "cinetico"]),
+  subcuadros: z
+    .number()
+    .int()
+    .min(1)
+    .max(4)
+    .describe(
+      "Subcuadros por cuadro para el desenfoque de movimiento (1 en Studio, 2 o 4 al renderizar)",
+    ),
   guion: z.object({
     pregunta: zTextarea().describe("Gancho. Saltos de línea manuales"),
     normaTitulo: z.string(),
@@ -49,22 +57,17 @@ export const esquemaMuestra = z.object({
     consecuencia: zTextarea().describe(
       "Una idea. La frase clave entre *asteriscos*",
     ),
+    antes: z.string().describe("Palabra que se tacha"),
+    despues: z.string().describe("Palabra en la que se transforma"),
+    linea: z.object({
+      de: z.string(),
+      a: z.string(),
+      frase: z.string(),
+    }),
   }),
-  cortes: z
-    .array(z.number())
-    .length(3)
-    .describe("Cuadros de los tres cortes, ajustados al pulso"),
-  desenfoque: z
-    .boolean()
-    .describe(
-      "Desenfoque de movimiento por canvas en las cortinas (necesita HTML-in-canvas). Apagado, se usa un desenfoque CSS según la velocidad",
-    ),
 });
 
 export type PropsMuestra = z.infer<typeof esquemaMuestra>;
-
-export const ESPERA_CORTINA = 8;
-export const DURACION_CORTINA = 16;
 
 export const tokensMovimiento = (
   registro: PropsMuestra["registro"],

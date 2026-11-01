@@ -17,6 +17,13 @@
     "fechaVersionArticulo": "2013-06-21",
     "verificado": "2026-11-01",
     "coincide": true
+   },
+   "antes": "De palabra",
+   "despues": "Por escritura",
+   "linea": {
+    "de": "Acuerdo",
+    "a": "Subinscripción",
+    "frase": "Treinta días para inscribirlo."
    }
   },
   "laboral": {
@@ -35,6 +42,13 @@
     "fechaVersionArticulo": "2021-07-27",
     "verificado": "2026-11-01",
     "coincide": true
+   },
+   "antes": "Despido",
+   "despues": "Despido nulo",
+   "linea": {
+    "de": "Despido",
+    "a": "Cotizaciones al día",
+    "frase": "Sin pago, no hay despido."
    }
   },
   "civil": {
@@ -53,6 +67,13 @@
     "fechaVersionArticulo": "2000-05-30",
     "verificado": "2026-11-01",
     "coincide": true
+   },
+   "antes": "Promesa",
+   "despues": "Promesa sin plazo",
+   "linea": {
+    "de": "Firma",
+    "a": "Fecha fijada",
+    "frase": "Sin plazo, no obliga."
    }
   },
   "empresas": {
@@ -72,6 +93,13 @@
     "verificado": "2026-11-01",
     "coincide": true,
     "nota": "La comisión fija del 1 % está en el art. 2 ter (no en el 2 bis, que fija el interés corriente). Corregido tras la verificación."
+   },
+   "antes": "Factura",
+   "despues": "Factura vencida",
+   "linea": {
+    "de": "Recepción",
+    "a": "Día 30",
+    "frase": "Desde el día 31, interés y 1 %."
    }
   }
  }

@@ -22,7 +22,7 @@
  "tonoFundamento": "El hero abre con el lema agilidad, cercanía y especialización y el titular Tus abogados presentes de verdad, no solo en los plazos. Todo el sitio tutea, cierra con Conversemos, promete avance semanal por mensaje, lenguaje claro y oficina abierta, y ofrece WhatsApp y calculadoras para estimar el caso en un minuto. La marca es moderna (coral sobre azul marino, sans geométrica en negrita, botones píldora) pero la voz es de acompañamiento y no de solemnidad.",
  "fuenteTono": "web+marca",
  "registro": "cinetico",
- "musica": null,
+ "musica": "stomp-and-clap",
  "estado": "listo",
  "notas": "Instagram no se pudo ver, curl redirige al login y la imagen og que entrega es el genérico de Instagram, así que logoCoincideInstagram queda en null. Logo tomado del PNG oficial assets/hilex-logo.png (500 x 187 px, RGBA con fondo transparente), que es la imagen og del sitio. No existe versión SVG, el encabezado usa hilex-logo-sm.png de 360 x 135 y los probes a hilex-logo.svg y variantes @2x dieron 404. Resolución intermedia, sobre los 400 px pero bajo los 800 px ideales, suficiente para muestra. El favicon de 512 px es solo el martillo coral sobre azul marino, sirve como isotipo. Colores sacados de assets/tokens.css, fondo es --bg white, tinta es --fg navy-900 #00004d que coincide con el azul del wordmark (#000048 medido en el logo) y acento es --accent coral-500 #eb5436 que coincide con el martillo del logo (#e85030 medido). La web usa League Spartan para display y cuerpo con pesos 700 y 800, sans geométrica, por eso Manrope como la más parecida de la lista."
 }
